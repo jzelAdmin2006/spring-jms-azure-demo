@@ -6,7 +6,7 @@ rootProject.name = 'spring-jms-azure-demo'
 
 extensions.gitHooks.with {
 	preCommit { ctx ->
-		ctx.tasks('build', ['spotlessApply'].toArray(), true)
+		ctx.tasks('build', ['spotlessCheck'].toArray(), true)
 	}
 	createHooks(true)
 }
