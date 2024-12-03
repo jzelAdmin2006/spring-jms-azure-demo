@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SpringJmsAzureDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="spring-jms-azure-demo.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.jzel.springjmsazuredemo.SpringJmsAzureDemoApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
