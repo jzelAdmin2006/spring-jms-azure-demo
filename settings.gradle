@@ -1,1 +1,12 @@
+plugins {
+    id "org.danilopianini.gradle-pre-commit-git-hooks" version "2.0.15"
+}
+
 rootProject.name = 'spring-jms-azure-demo'
+
+extensions.gitHooks.with {
+    preCommit { ctx ->
+        ctx.tasks('build', ['spotlessApply'].toArray(), true)
+    }
+    createHooks(true)
+}
