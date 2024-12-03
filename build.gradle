@@ -35,7 +35,7 @@ dependencies {
 	// and only acceptable because this is a demo project. The Service Bus JMS sub-library has the 'amqps' scheme
 	// hard-coded but the emulator uses 'amqp', so I've adjusted this pragmatically this way.
 	implementation files('libs/azure-servicebus-jms-2.0.0.jar')
-
+	implementation 'com.google.code.gson:gson:2.11.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

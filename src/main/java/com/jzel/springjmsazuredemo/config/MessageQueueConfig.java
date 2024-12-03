@@ -1,5 +1,6 @@
-package com.jzel.springjmsazuredemo;
+package com.jzel.springjmsazuredemo.config;
 
+import com.jzel.springjmsazuredemo.model.MessageObj;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import java.util.HashMap;
