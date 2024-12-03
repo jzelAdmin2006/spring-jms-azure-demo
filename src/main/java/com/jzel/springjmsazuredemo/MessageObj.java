@@ -1,5 +1,3 @@
 package com.jzel.springjmsazuredemo;
 
-public record MessageObj(String value) {
-
-}
+public record MessageObj(String value) {}
