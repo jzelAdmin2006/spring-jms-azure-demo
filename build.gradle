@@ -21,11 +21,20 @@ configurations {
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.azure.spring:spring-cloud-azure-starter-servicebus-jms:5.18.0'
+
+    // See https://github.com/Azure/azure-servicebus-jms/issues/26#issuecomment-2514112085: This is extremely ugly
+    // and only acceptable because this is a demo project. The Service Bus JMS sub-library has the 'amqps' scheme
+    // hard-coded but the emulator uses 'amqp', so I've adjusted this pragmatically this way.
+    implementation files('libs/azure-servicebus-jms-2.0.0.jar')
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -34,4 +43,8 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+bootJar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
