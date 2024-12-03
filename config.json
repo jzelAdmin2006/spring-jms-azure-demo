@@ -1,107 +1,89 @@
-{
-  "UserConfig": {
-    "Namespaces": [
-      {
-        "Name": "sbemulatorns",
-        "Queues": [
-          {
-            "Name": "queue.1",
-            "Properties": {
-              "DeadLetteringOnMessageExpiration": false,
-              "DefaultMessageTimeToLive": "PT1H",
-              "DuplicateDetectionHistoryTimeWindow": "PT20S",
-              "ForwardDeadLetteredMessagesTo": "",
-              "ForwardTo": "",
-              "LockDuration": "PT1M",
-              "MaxDeliveryCount": 10,
-              "RequiresDuplicateDetection": false,
-              "RequiresSession": false
-            }
-          }
-        ],
-        "Topics": [
-          {
-            "Name": "topic.1",
-            "Properties": {
-              "DefaultMessageTimeToLive": "PT1H",
-              "DuplicateDetectionHistoryTimeWindow": "PT20S",
-              "RequiresDuplicateDetection": false
-            },
+{"UserConfig": {
+    "Logging": {"Type": "File"},
+    "Namespaces": [{
+        "Topics": [{
             "Subscriptions": [
-              {
-                "Name": "subscription.1",
-                "Properties": {
-                  "DeadLetteringOnMessageExpiration": false,
-                  "DefaultMessageTimeToLive": "PT1H",
-                  "LockDuration": "PT1M",
-                  "MaxDeliveryCount": 10,
-                  "ForwardDeadLetteredMessagesTo": "",
-                  "ForwardTo": "",
-                  "RequiresSession": false
-                },
-                "Rules": [
-                  {
-                    "Name": "app-prop-filter-1",
+                {
                     "Properties": {
-                      "FilterType": "Correlation",
-                      "CorrelationFilter": {
-                        "ContentType": "application/text",
-                        "CorrelationId": "id1",
-                        "Label": "subject1",
-                        "MessageId": "msgid1",
-                        "ReplyTo": "someQueue",
-                        "ReplyToSessionId": "sessionId",
-                        "SessionId": "session1",
-                        "To": "xyz"
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "Name": "subscription.2",
-                "Properties": {
-                  "DeadLetteringOnMessageExpiration": false,
-                  "DefaultMessageTimeToLive": "PT1H",
-                  "LockDuration": "PT1M",
-                  "MaxDeliveryCount": 10,
-                  "ForwardDeadLetteredMessagesTo": "",
-                  "ForwardTo": "",
-                  "RequiresSession": false
-                },
-                "Rules": [
-                  {
-                    "Name": "user-prop-filter-1",
-                    "Properties": {
-                      "FilterType": "Correlation",
-                      "CorrelationFilter": {
+                        "DeadLetteringOnMessageExpiration": false,
+                        "ForwardDeadLetteredMessagesTo": "",
+                        "MaxDeliveryCount": 10,
+                        "RequiresSession": false,
+                        "DefaultMessageTimeToLive": "PT1H",
+                        "LockDuration": "PT1M",
+                        "ForwardTo": ""
+                    },
+                    "Rules": [{
                         "Properties": {
-                          "prop3": "value3"
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "Name": "subscription.3",
-                "Properties": {
-                  "DeadLetteringOnMessageExpiration": false,
-                  "DefaultMessageTimeToLive": "PT1H",
-                  "LockDuration": "PT1M",
-                  "MaxDeliveryCount": 10,
-                  "ForwardDeadLetteredMessagesTo": "",
-                  "ForwardTo": "",
-                  "RequiresSession": false
+                            "FilterType": "Correlation",
+                            "CorrelationFilter": {
+                                "ReplyTo": "someQueue",
+                                "ReplyToSessionId": "sessionId",
+                                "ContentType": "application/text",
+                                "Label": "subject1",
+                                "CorrelationId": "id1",
+                                "To": "xyz",
+                                "SessionId": "session1",
+                                "MessageId": "msgid1"
+                            }
+                        },
+                        "Name": "app-prop-filter-1"
+                    }],
+                    "Name": "subscription.1"
+                },
+                {
+                    "Properties": {
+                        "DeadLetteringOnMessageExpiration": false,
+                        "ForwardDeadLetteredMessagesTo": "",
+                        "MaxDeliveryCount": 10,
+                        "RequiresSession": false,
+                        "DefaultMessageTimeToLive": "PT1H",
+                        "LockDuration": "PT1M",
+                        "ForwardTo": ""
+                    },
+                    "Rules": [{
+                        "Properties": {
+                            "FilterType": "Correlation",
+                            "CorrelationFilter": {"Properties": {"prop3": "value3"}}
+                        },
+                        "Name": "user-prop-filter-1"
+                    }],
+                    "Name": "subscription.2"
+                },
+                {
+                    "Properties": {
+                        "DeadLetteringOnMessageExpiration": false,
+                        "ForwardDeadLetteredMessagesTo": "",
+                        "MaxDeliveryCount": 10,
+                        "RequiresSession": false,
+                        "DefaultMessageTimeToLive": "PT1H",
+                        "LockDuration": "PT1M",
+                        "ForwardTo": ""
+                    },
+                    "Name": "subscription.3"
                 }
-              }
-            ]
-          }
-        ]
-      }
-    ],
-    "Logging": {
-      "Type": "File"
-    }
-  }
-}
+            ],
+            "Properties": {
+                "RequiresDuplicateDetection": false,
+                "DuplicateDetectionHistoryTimeWindow": "PT20S",
+                "DefaultMessageTimeToLive": "PT1H"
+            },
+            "Name": "topic.1"
+        }],
+        "Queues": [{
+            "Properties": {
+                "DeadLetteringOnMessageExpiration": false,
+                "RequiresDuplicateDetection": false,
+                "DuplicateDetectionHistoryTimeWindow": "PT20S",
+                "ForwardDeadLetteredMessagesTo": "",
+                "MaxDeliveryCount": 10,
+                "RequiresSession": false,
+                "DefaultMessageTimeToLive": "PT1H",
+                "LockDuration": "PT1M",
+                "ForwardTo": ""
+            },
+            "Name": "queue.1"
+        }],
+        "Name": "sbemulatorns"
+    }]
+}}

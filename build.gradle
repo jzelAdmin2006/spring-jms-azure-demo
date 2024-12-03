@@ -1,65 +1,76 @@
 plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.4.0'
-    id 'io.spring.dependency-management' version '1.1.6'
-    id 'com.diffplug.spotless' version '6.25.0'
+	id 'java'
+	id 'org.springframework.boot' version '3.4.0'
+	id 'io.spring.dependency-management' version '1.1.6'
+	id 'com.diffplug.spotless' version '6.25.0'
 }
 
 group = 'com.jzel'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
 }
 
 configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
 }
 
 repositories {
-    mavenCentral()
-    flatDir {
-        dirs 'libs'
-    }
+	mavenCentral()
+	flatDir {
+		dirs 'libs'
+	}
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.azure.spring:spring-cloud-azure-starter-servicebus-jms:5.18.0'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.azure.spring:spring-cloud-azure-starter-servicebus-jms:5.18.0'
 
-    // See https://github.com/Azure/azure-servicebus-jms/issues/26#issuecomment-2514112085: This is extremely ugly
-    // and only acceptable because this is a demo project. The Service Bus JMS sub-library has the 'amqps' scheme
-    // hard-coded but the emulator uses 'amqp', so I've adjusted this pragmatically this way.
-    implementation files('libs/azure-servicebus-jms-2.0.0.jar')
+	// See https://github.com/Azure/azure-servicebus-jms/issues/26#issuecomment-2514112085: This is extremely ugly
+	// and only acceptable because this is a demo project. The Service Bus JMS sub-library has the 'amqps' scheme
+	// hard-coded but the emulator uses 'amqp', so I've adjusted this pragmatically this way.
+	implementation files('libs/azure-servicebus-jms-2.0.0.jar')
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
 
 bootJar {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 spotless {
-    java {
-        target fileTree('.') {
-            include '**/*.java'
-            exclude '**/build/**', '**/build-*/**'
-        }
-        toggleOffOn()
-        palantirJavaFormat()
-        removeUnusedImports()
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
+	java {
+		target '**/*.java'
+		googleJavaFormat()
+	}
+	groovy {
+		target '**/*.gradle'
+		greclipse()
+	}
+	json {
+		target '**/*.json'
+		simple()
+	}
+	yaml {
+		target '**/*.yaml', '**/*.yml'
+		jackson()
+	}
+	format 'misc', {
+		target '**/*.sh', '.gitattributes', '.gitignore', '.env'
+		trimTrailingWhitespace()
+		indentWithTabs()
+		endWithNewline()
+	}
 }
